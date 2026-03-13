@@ -8,7 +8,7 @@ define alt = Character('アル〇マン', color="#ff76b6")
 
 # ワイのパラメータ
 default my_lv = 1
-default my_mp_max = 15
+default my_mp_max = 10
 default my_mp = my_mp_max
 default my_exp = 0
 default my_luck = 0
@@ -40,7 +40,7 @@ label home:
 
     menu:
 
-        wai "{color=#080}MP：[my_mp]{/color}\nここは自宅前だ…"
+        wai "{color=#080}Lv：[my_lv]　MP：[my_mp]　Exp：[my_exp]{/color}\nここは自宅前だ…"
 
         "周囲を調べる":
             jump search_home
@@ -237,11 +237,12 @@ label battle:
 
         menu:
 
-            "どうする？"
+            "{color=#080}Lv：[my_lv]　MP：[my_mp]　Exp：[my_exp]{/color}\nどうする？"
 
             "たたかう":
 
-                $ damage = int(my_mp / 2) + 1
+                # ダメージ値：「MP/2～MP」の乱数
+                $ damage = renpy.random.randint(int(my_mp / 2),my_mp)
 
                 $ crit = renpy.random.randint(1,100) <= my_luck * 2
 
