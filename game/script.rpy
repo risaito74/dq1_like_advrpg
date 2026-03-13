@@ -40,7 +40,7 @@ label home:
 
     menu:
 
-        wai "{color=#080}Lv：[my_lv]　MP：[my_mp]　Exp：[my_exp]{/color}\nここは自宅前だ…"
+        wai "{color=#080}Lv：[my_lv]　MP：[my_mp]　Exp：[my_exp]　所持金：[my_yen]円{/color}\nここは自宅前だ…"
 
         "周囲を調べる":
             jump search_home
@@ -88,10 +88,9 @@ label rest_home:
 # =========================
 label convenience:
 
-    wai "ここはコンビニ前だ…\n
-    （所持金：[my_yen]円）"
-
     menu:
+
+        wai "{color=#080}Lv：[my_lv]　MP：[my_mp]　Exp：[my_exp]　所持金：[my_yen]円{/color}\nここはコンビニ前だ…"
 
         "周囲を調べる":
             jump search_conveni
@@ -175,9 +174,9 @@ label buy_takenoko:
 # =========================
 label station:
 
-    wai "ここは駅前だ…"
-
     menu:
+
+        wai "{color=#080}Lv：[my_lv]　MP：[my_mp]　Exp：[my_exp]　所持金：[my_yen]円{/color}\nここは駅前だ…"
 
         "周囲を調べる":
             jump search_station
@@ -205,12 +204,12 @@ label battle:
 
     if enemy == "gal":
         $ enemy_name = "ギャル"
-        $ enemy_hp = 10
+        $ enemy_hp = 11
         $ enemy_atk = 2
 
     elif enemy == "pien":
         $ enemy_name = "ぴえん"
-        $ enemy_hp = 12
+        $ enemy_hp = 13
         $ enemy_atk = 3
 
     elif enemy == "mesu":
