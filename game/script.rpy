@@ -240,6 +240,8 @@ label battle:
 
             "たたかう":
 
+                wai "ここを…こうじゃ！"
+
                 # ダメージ値：「MP/2～MP」の乱数
                 $ damage = renpy.random.randint(int(my_mp / 2),my_mp)
 
@@ -258,10 +260,17 @@ label battle:
 
                 "[enemy_name] のこうげき！"
 
+                # 敵ごとの一言セリフ
+                if enemy == "gal":
+                    "ギャルの一言"
+                elif enemy == "pien":
+                    "ぴえんの一言"
+                elif enemy == "mesu":
+                    "メスガキの一言"
+
                 $ my_mp -= enemy_atk
 
-                "ワイのメンタルが[enemy_atk]削られた！\n
-                ワイMP：[my_mp]"
+                "ワイのメンタルが[enemy_atk]削られた！"
 
                 jump battle_loop
 
@@ -280,8 +289,7 @@ label battle:
 
                     $ my_mp -= enemy_atk
 
-                    "ワイのメンタルが[enemy_atk]削られた！\n
-                    ワイMP：[my_mp]"
+                    "ワイのメンタルが[enemy_atk]削られた！"
 
                     jump battle_loop
 
