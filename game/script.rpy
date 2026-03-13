@@ -8,19 +8,19 @@ define alt = Character('アル〇マン', color="#ff76b6")
 
 # ワイのパラメータ
 default my_lv = 1
-default my_mp_max = 10
+default my_mp_max = 15
 default my_mp = my_mp_max
 default my_exp = 0
 default my_luck = 0
 default my_yen = 500
 
-# エネミー関係のデータ、パラメータ
-
 # ゲーム進行用のフラグとか
 default is_debug_mode = True
 default is_unlock_data_center = False
 
+# =========================
 # オープニング（自宅前）
+# =========================
 label  start:
     
     wai "…よし、なんとか外に出ることに成功したぞ…"
@@ -29,12 +29,18 @@ label  start:
 
     "こうして、あなたの冒険が始まった…"
 
-##### 自宅前 #####
+# =========================
+# 自宅前
+# =========================
 label home:
 
-    wai "ここは自宅前だ…"
+    scene bg_town01
+
+    #wai "ここは自宅前だ…"
 
     menu:
+
+        wai "{color=#080}MP：[my_mp]{/color}\nここは自宅前だ…"
 
         "周囲を調べる":
             jump search_home
@@ -57,18 +63,12 @@ label home:
 # 自宅前：周囲を調べる
 label search_home:
 
-    # どの敵が出現するかの決定処理
+    "周囲を探索した…"
+
     # 自宅前で出現する敵：「ギャル」(50%)、「メスガキ」(50%)
+    $ enemy = renpy.random.choice(["gal", "mesu"])
 
-    "〇〇があらわれた！"
-
-    # 戦闘処理
-
-    # ワイのMPが0ならゲームオーバー
-
-    "〇〇を倒した！"
-
-    jump home
+    jump battle
 
 # 自宅前：自宅で寝る
 label rest_home:
@@ -82,7 +82,9 @@ label rest_home:
 
     jump home
 
-##### コンビニ前 #####
+# =========================
+# コンビニ前
+# =========================
 label convenience:
 
     wai "ここはコンビニ前だ…\n
@@ -105,18 +107,12 @@ label convenience:
 # コンビニ前：周囲を調べる
 label search_conveni:
 
-    # どの敵が出現するかの決定処理
+    "周囲を探索した…"
+
     # コンビニ前で出現する敵：「ギャル」(50%)、「ぴえん」(50%)
+    $ enemy = renpy.random.choice(["gal", "pien"])
 
-    "〇〇があらわれた！"
-
-    # 戦闘処理
-
-    # ワイのMPが0ならゲームオーバー
-
-    "〇〇を倒した！"
-
-    jump convenience
+    jump battle
 
 # コンビニ前：コンビニに入る
 label shop:
@@ -124,8 +120,9 @@ label shop:
     wai "ここはコンビニだ。\n
     （所持金：[my_yen]円）"
 
-
     menu:
+
+        "所持金：[my_yen]円"
 
         "ドクターヘッツァーを買う (150円)":
             jump buy_hezza
@@ -172,7 +169,9 @@ label buy_takenoko:
 
     jump shop
 
-##### 駅前 #####
+# =========================
+# 駅前 
+# =========================
 label station:
 
     wai "ここは駅前だ…"
@@ -191,20 +190,178 @@ label station:
 # 駅前：周囲を調べる
 label search_station:
 
-    # どの敵が出現するかの決定処理
+    "周囲を探索した…"
+
     # 駅前で出現する敵：「メスガキ」(50%)、「ぴえん」(50%)
+    $ enemy = renpy.random.choice(["mesu", "pien"])
 
-    "〇〇があらわれた！"
+    jump battle
 
-    # 戦闘処理
+# =========================
+# バトル
+# =========================
+label battle:
 
-    # ワイのMPが0ならゲームオーバー
+    if enemy == "gal":
+        $ enemy_name = "ギャル"
+        $ enemy_hp = 10
+        $ enemy_atk = 2
 
-    "〇〇を倒した！"
+    elif enemy == "pien":
+        $ enemy_name = "ぴえん"
+        $ enemy_hp = 12
+        $ enemy_atk = 3
 
-    jump station
+    elif enemy == "mesu":
+        $ enemy_name = "メスガキ"
+        $ enemy_hp = 15
+        $ enemy_atk = 4
 
+    elif enemy == "chappy":
+        $ enemy_name = "チャッピー"
+        $ enemy_hp = 30
+        $ enemy_atk = 5
+
+    "[enemy_name] があらわれた！"
+
+    label battle_loop:
+
+        # 勝利チェック
+        if enemy_hp <= 0:
+            jump victory
+
+        # ゲームオーバーチェック
+        if my_mp <= 0:
+            jump game_over
+
+        menu:
+
+            "どうする？"
+
+            "たたかう":
+
+                $ damage = int(my_mp / 2) + 1
+
+                $ crit = renpy.random.randint(1,100) <= my_luck * 2
+
+                if crit:
+                    $ damage *= 2
+                    "かいしんのいちげき！"
+
+                $ enemy_hp -= damage
+
+                "[enemy_name] のHP（エッチポイント）に[damage]のダメージ！"
+
+                if enemy_hp <= 0:
+                    jump victory
+
+                "[enemy_name] のこうげき！"
+
+                $ my_mp -= enemy_atk
+
+                "ワイのメンタルが[enemy_atk]削られた！\n
+                ワイMP：[my_mp]"
+
+                jump battle_loop
+
+
+            "にげる":
+
+                $ run_chance = 50 + my_luck
+
+                if renpy.random.randint(1,100) <= run_chance:
+                    "うまく逃げた！"
+                    jump home
+                else:
+                    "逃げられなかった！"
+
+                    "[enemy_name] のこうげき！"
+
+                    $ my_mp -= enemy_atk
+
+                    "ワイのメンタルが[enemy_atk]削られた！\n
+                    ワイMP：[my_mp]"
+
+                    jump battle_loop
+
+
+# =========================
+# 勝利
+# =========================
+label victory:
+
+    "[enemy_name] を倒した！"
+
+    $ reward = renpy.random.randint(100,200)
+
+    $ my_yen += reward
+
+    "[reward]円を手に入れた！"
+
+    if enemy == "gal":
+
+        "ギャルのパンティを手に入れた！"
+        "ワイはパンティを使った！"
+
+        $ my_exp += 2
+
+        "人生経験が2ふえた！"
+
+    elif enemy == "pien":
+
+        "ストロング缶を手に入れた！"
+        "ワイはストロング缶を飲んだ！"
+
+        $ my_exp += 3
+
+        "人生経験が3ふえた！"
+
+    elif enemy == "mesu":
+
+        "スポブラを手に入れた！"
+        "ワイはスポブラを使った！"
+
+        $ my_exp += 4
+
+        "人生経験が4ふえた！"
+
+    jump level_check
+
+
+# =========================
+# レベルチェック
+# =========================
+label level_check:
+
+    if my_exp >= my_lv * 5:
+
+        $ my_lv += 1
+        $ my_mp_max += 2
+        $ my_mp = my_mp_max
+
+        "レベルが上がった！"
+        "MP最大値が上がった！"
+
+        if my_lv >= 5 and not is_unlock_data_center:
+            jump unlock_data_center
+
+    jump home
+
+# =========================
+# ゲームオーバー
+# =========================
+
+label game_over:
+
+    "ワイのメンタルは完全に崩壊した…"
+
+    "ゲームオーバー"
+
+    return
+
+# =========================
 # データセンター解放イベント
+# =========================
 label unlock_data_center:
 
     "ゴゴゴゴゴゴ…"
@@ -233,7 +390,9 @@ label unlock_data_center:
         "データセンターへ行く":
             jump data_center
 
-##### データセンター #####
+# =========================
+# データセンター
+# =========================
 label data_center:
 
     wai "ここがデータセンターってやつかー"
@@ -261,7 +420,9 @@ label data_center:
 
     "チャッピーを倒した！"
 
-##### エンディング #####
+# =========================
+# エンディング
+# =========================
 label ending:
 
     chp "ウボァー！"
@@ -331,5 +492,7 @@ label citron_mode:
 
     "ベストエンド！"
 
+# =========================
 # ゲーム終了
+# =========================
 label game_end:
