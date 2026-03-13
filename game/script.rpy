@@ -65,8 +65,8 @@ label search_home:
 
     "周囲を探索した…"
 
-    # 自宅前で出現する敵：「ギャル」(50%)、「メスガキ」(50%)
-    $ enemy = renpy.random.choice(["gal", "mesu"])
+    # 自宅前で出現する敵：「ギャル」(100%)
+    $ enemy = "gal"
 
     jump battle
 
@@ -79,6 +79,7 @@ label rest_home:
     MP（メンタルポイント）が全回復した！"
 
     # MP全回復処理
+    $ my_mp = my_mp_max
 
     jump home
 
@@ -192,8 +193,8 @@ label search_station:
 
     "周囲を探索した…"
 
-    # 駅前で出現する敵：「メスガキ」(50%)、「ぴえん」(50%)
-    $ enemy = renpy.random.choice(["mesu", "pien"])
+    # 駅前で出現する敵：「メスガキ」(50%)、「ギャル」(50%)
+    $ enemy = renpy.random.choice(["mesu", "gal"])
 
     jump battle
 
