@@ -394,7 +394,6 @@ label victory:
         "ワイはパンティを使った！"
 
         $ add_exp = 2
-        $ my_exp += add_exp
 
     elif enemy == "pien":
 
@@ -402,7 +401,6 @@ label victory:
         "ワイはストロング缶を飲んだ！"
 
         $ add_exp = 3
-        $ my_exp += add_exp
 
     elif enemy == "mesu":
 
@@ -410,14 +408,14 @@ label victory:
         "ワイはスポブラを使った！"
 
         $ add_exp = 4
-        $ my_exp += add_exp
+
+    $ my_exp += add_exp
 
     play sound "決定ボタンを押す17.mp3"
 
     "人生経験が{add_exp}ふえた！"
 
     jump level_check
-
 
 # =========================
 # レベルチェック
