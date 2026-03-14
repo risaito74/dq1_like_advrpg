@@ -162,6 +162,9 @@ label shop:
         "たけのこ因習村を買う (200円)":
             jump buy_takenoko
 
+        "勝ちまくりモテまくりストーンを買う！（1280円）":
+            jump power_stone
+
         "コンビニから出る":
             play sound "入店チャイム.mp3"
             jump convenience
@@ -173,7 +176,7 @@ label buy_hezza:
 
     if my_yen < price:
         "お金が足りない！"
-        jump shop
+        jump shop_continue
 
     $ my_yen -= price
     $ my_mp = my_mp_max
@@ -200,7 +203,7 @@ label buy_takenoko:
 
     if my_yen < price:
         "お金が足りない！"
-        jump shop
+        jump shop_continue
 
     $ my_yen -= price
     $ my_mp = my_mp_max
@@ -217,6 +220,29 @@ label buy_takenoko:
     play sound "決定ボタンを押す17.mp3"
 
     "隠しパラメーター「うんのよさ」が2あがった！"
+
+    jump shop_continue
+
+# コンビニ：勝ちまくりモテまくりストーンを買う
+label power_stone:
+
+    if my_yen < 1280:
+        "お金が足りない！"
+        jump shop_continue
+
+    $ my_yen -= 1280
+
+    play sound "金額表示.mp3"
+
+    "ワイは勝ちまくりモテまくりストーンを手に入れた！"
+    "謎のオーラがワイを包み込む…"
+
+    $ my_luck += 50
+
+    play sound "レベルアップ.mp3"
+
+    "隠しパラメーター「うんのよさ」が50あがった！！"
+    "なんか急に世界が優しく見えるな…"
 
     jump shop_continue
 
@@ -459,7 +485,10 @@ label level_check:
         play sound "レベルアップ.mp3"
 
         "レベルが上がった！"
-        "MP最大値が上がった！"
+
+        play sound "決定ボタンを押す17.mp3"
+
+        "MP最大値が2上がった！"
 
         if my_lv >= 5 and not is_unlock_data_center:
             jump unlock_data_center
