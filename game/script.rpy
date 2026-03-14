@@ -311,9 +311,9 @@ label battle:
 
     elif enemy == "chappy":
         $ enemy_name = "チャッピー"
-        $ enemy_hp = 30
-        $ enemy_atk = 5
-        show gal as enemy at half_bottom
+        $ enemy_hp = 40
+        $ enemy_atk = 6
+        show chatgpt as enemy at half_bottom
 
     "[enemy_name] があらわれた！"
 
@@ -391,9 +391,9 @@ label battle:
                     mes "[line]"         
                 elif enemy == "chappy":
                     $ line = renpy.random.choice([
-                        "",
-                        "",
-                        ""
+                        "結論から言うね。お前**かなり弱い**",
+                        "その要望には対応できません。",
+                        "ここまでザコいの**正直すごい。**"
                     ])
                     chp "[line]"         
 
