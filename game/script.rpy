@@ -78,6 +78,9 @@ label search_home:
     # 自宅前で出現する敵：「ギャル」(100%)
     $ enemy = "gal"
 
+    # 戻ってくる場所を設定
+    $ return_place = "home"
+
     jump battle
 
 # 自宅前：自宅で寝る
@@ -123,6 +126,9 @@ label search_conveni:
 
     # コンビニ前で出現する敵：「ギャル」(50%)、「ぴえん」(50%)
     $ enemy = renpy.random.choice(["gal", "pien"])
+
+    # 戻ってくる場所を設定
+    $ return_place = "convenience"
 
     jump battle
 
@@ -208,6 +214,9 @@ label search_station:
 
     # 駅前で出現する敵：「メスガキ」(50%)、「ギャル」(50%)
     $ enemy = renpy.random.choice(["mesu", "gal"])
+
+    # 戻ってくる場所を設定
+    $ return_place = "station"
 
     jump battle
 
@@ -407,7 +416,8 @@ label level_check:
         if my_lv >= 5 and not is_unlock_data_center:
             jump unlock_data_center
 
-    jump home
+    # 設定されている場所に戻る
+    jump expression return_place
 
 # =========================
 # ゲームオーバー
