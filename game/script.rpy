@@ -18,6 +18,12 @@ default my_yen = 500
 default is_debug_mode = True
 default is_unlock_data_center = False
 
+# ギャラ画像の表示調整用
+transform half_bottom:
+    zoom 0.45
+    xalign 0.7
+    yalign 1.0
+
 # 画面シェイクエフェクトの定義
 transform shake:
     linear 0.05 xoffset -15
@@ -236,25 +242,29 @@ label battle:
         $ enemy_name = "ギャル"
         $ enemy_hp = 11
         $ enemy_atk = 2
+        show gal as enemy at half_bottom
 
     elif enemy == "pien":
         $ enemy_name = "ぴえん"
         $ enemy_hp = 13
         $ enemy_atk = 3
+        show pien as enemy at half_bottom
 
     elif enemy == "mesu":
         $ enemy_name = "メスガキ"
         $ enemy_hp = 15
         $ enemy_atk = 4
+        show mesugaki as enemy at half_bottom
 
     elif enemy == "chappy":
         $ enemy_name = "チャッピー"
         $ enemy_hp = 30
         $ enemy_atk = 5
+        show gal as enemy at half_bottom
 
     "[enemy_name] があらわれた！"
 
-    # 敵によってBGM変える
+    # 敵によってBGMを変える
     if enemy == "gal":
         play music "gal_battle.mp3"
     elif enemy == "pien":
@@ -345,6 +355,8 @@ label battle:
                 $ run_chance = 50 + my_luck
 
                 if renpy.random.randint(1,100) <= run_chance:
+                    hide enemy
+
                     "うまく逃げた！"
 
                     # 設定されている場所に戻る
@@ -360,6 +372,8 @@ label battle:
 # 勝利
 # =========================
 label victory:
+
+    hide enemy
 
     stop music
     play sound "ドンドンパフパフ.mp3"
