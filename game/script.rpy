@@ -389,6 +389,13 @@ label battle:
                         "よわよわじゃんｗ"
                     ])
                     mes "[line]"         
+                elif enemy == "chappy":
+                    $ line = renpy.random.choice([
+                        "",
+                        "",
+                        ""
+                    ])
+                    chp "[line]"         
 
                 $ my_mp -= enemy_atk
 
@@ -405,6 +412,11 @@ label battle:
             "にげる":
 
                 play sound "逃走.mp3"
+
+                # ラスボス戦は逃げられない！
+                if enemy == "chappy":
+                    chp "結論から言うね。\nチャッピーから**逃げることはできない！**"
+                    jump enemy_attack
 
                 $ run_chance = 50 + my_luck
 
@@ -567,15 +579,18 @@ label data_center:
     wai "そうか…そういうことか…\n
     このゲームの全てが…うん…わかって…きたぞ…"
 
-    # ラスボス戦開始
+    menu:
 
-    "チャッピーがあらわれた！"
+        god "このチャッピー、ラスボスだからけっこう強いですよ。\n本当に戦いますか？"
 
-    # 戦闘処理
+        "たたかう":
+            $ enemy = "chappy"
+            # バトルに買ったらエンディング
+            $ return_place = "ending"
+            jump battle
 
-    # ワイのMPが0ならゲームオーバー
-
-    "チャッピーを倒した！"
+        "いったん自宅に帰る":
+            jump home
 
 # =========================
 # エンディング
