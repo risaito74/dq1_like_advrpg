@@ -541,9 +541,16 @@ label level_check:
 
 label game_over:
 
+    scene black with fade
+    stop music fadeout 1.0
+
+    wai "…大きな星が、ついたり消えたりしてる…\nアハハ、大きい…彗星かなぁ…"
+
     "ワイのメンタルは完全に崩壊した…"
 
-    "ゲームオーバー"
+    play sound "運命2.mp3"
+
+    "💀💀💀ゲームオーバー💀💀💀"
 
     return
 
