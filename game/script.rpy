@@ -4,7 +4,7 @@ define pie = Character('ぴえん', color="#ff76b6")
 define mes = Character('メスガキ', color="#ff76b6")
 define chp = Character('チャッピー', color="#ff76b6")
 define god = Character('女神', color="#ff76b6")
-define alt = Character('アル〇マン', color="#ff76b6")
+define alt = Character('アル〇マン', color="#5933ff")
 
 # ワイのパラメータ
 default my_lv = 1
@@ -601,11 +601,13 @@ label ending:
 
     wai "やったか！？"
 
-    alt "待ちなさい…"
+    "？？？" "待ちなさい…"
 
     wai "お、お前は！？"
 
-    alt "そう、私はアルトマ（ピー）\n
+    show alt at half_bottom
+
+    alt "そう、私はアルトマ（ピーー）\n
     このチャッピーの創造主だ…"
 
     alt "結論から言うが、このチャッピーは暴走していたのだ…\n
@@ -630,10 +632,12 @@ label golden_ax:
 
     alt "…そうか、じゃあ持っていけ"
 
+    scene black with fade
+
     "こうして、金の斧を持ち帰ったワイは、\n
     メルカリに出品して980円を手に入れたのだった"
 
-    "ノーマルエンド"
+    "✌️✌️✌️ノーマルエンド✌️✌️✌️"
 
     jump game_end
 
@@ -643,10 +647,12 @@ label silver_angel:
     alt "え？　銀のエンゼル！？\n
     まあ、たまたま持っているが…じゃあ持ってけ"
 
+    scene black with fade
+
     "こうして、銀のエンゼルを持ち帰ったワイは、\n
     あと4枚集めて、カンヅメを手に入れたのだった"
 
-    "ノーマルエンド"
+    "✌️✌️✌️ノーマルエンド✌️✌️✌️"
 
     jump game_end
 
@@ -658,11 +664,13 @@ label citron_mode:
 
     wai "うっす！"
 
+    scene black with fade
+
     "こうして、シトロンモードを持ち帰ったワイは、\n
     シトロンなチャッピーといつまでもいつまでも幸せに暮らしましたとさ\n
     どんどはれ"
 
-    "ベストエンド！"
+    "😊😊😊ベストエンド！😊😊😊"
 
 # =========================
 # ゲーム終了
