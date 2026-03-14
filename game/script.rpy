@@ -472,7 +472,7 @@ label data_center:
 
     play music "data_center_bgm.mp3"
 
-    scene bg_station01 with fade
+    scene bg_data_center01 with fade
 
     wai "ここがデータセンターってやつかー"
 
