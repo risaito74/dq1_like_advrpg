@@ -162,7 +162,7 @@ label shop:
         "たけのこ因習村を買う (200円)":
             jump buy_takenoko
 
-        "勝ちまくりモテまくりストーンを買う！（1280円）":
+        "勝ちまくりモテまくりストーンを買う！（1980円）":
             jump power_stone
 
         "コンビニから出る":
@@ -226,11 +226,13 @@ label buy_takenoko:
 # コンビニ：勝ちまくりモテまくりストーンを買う
 label power_stone:
 
-    if my_yen < 1280:
+    $ price = 1980
+
+    if my_yen < price:
         "お金が足りない！"
         jump shop_continue
 
-    $ my_yen -= 1280
+    $ my_yen -= price
 
     play sound "金額表示.mp3"
 
@@ -297,13 +299,13 @@ label battle:
 
     elif enemy == "pien":
         $ enemy_name = "ぴえん"
-        $ enemy_hp = 13
+        $ enemy_hp = 14
         $ enemy_atk = 3
         show pien as enemy at half_bottom
 
     elif enemy == "mesu":
         $ enemy_name = "メスガキ"
-        $ enemy_hp = 15
+        $ enemy_hp = 18
         $ enemy_atk = 4
         show mesugaki as enemy at half_bottom
 
@@ -512,6 +514,8 @@ label game_over:
 # データセンター解放イベント
 # =========================
 label unlock_data_center:
+
+    play sound "ゴゴゴゴ.mp3"
 
     "ゴゴゴゴゴゴ…"
 
