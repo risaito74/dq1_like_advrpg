@@ -18,6 +18,14 @@ default my_yen = 500
 default is_debug_mode = True
 default is_unlock_data_center = False
 
+# 画面シェイクエフェクトの定義
+transform shake:
+    linear 0.05 xoffset -15
+    linear 0.05 xoffset 15
+    linear 0.05 xoffset -10
+    linear 0.05 xoffset 10
+    linear 0.05 xoffset 0
+
 # =========================
 # オープニング（自宅前）
 # =========================
@@ -33,6 +41,8 @@ label  start:
 # 自宅前
 # =========================
 label home:
+
+    play music "main_bgm.mp3"
 
     scene bg_town01
 
@@ -87,6 +97,8 @@ label rest_home:
 # コンビニ前
 # =========================
 label convenience:
+
+    play music "main_bgm.mp3"
 
     menu:
 
@@ -174,6 +186,8 @@ label buy_takenoko:
 # =========================
 label station:
 
+    play music "main_bgm.mp3"
+
     menu:
 
         wai "{color=#080}Lv：[my_lv]　MP：[my_mp]　Exp：[my_exp]　所持金：[my_yen]円{/color}\nここは駅前だ…"
@@ -202,6 +216,9 @@ label search_station:
 # =========================
 label battle:
 
+    stop music
+    play sound "バーン.mp3"
+
     if enemy == "gal":
         $ enemy_name = "ギャル"
         $ enemy_hp = 11
@@ -224,6 +241,16 @@ label battle:
 
     "[enemy_name] があらわれた！"
 
+    # 敵によってBGM変える
+    if enemy == "gal":
+        play music "gal_battle.mp3"
+    elif enemy == "pien":
+        play music "pien_battle.mp3"
+    elif enemy == "mesu":
+        play music "mesugaki_battle.mp3"
+    elif enemy == "chappy":
+        play music "boss_battle.mp3"
+
     label battle_loop:
 
         # 勝利チェック
@@ -241,6 +268,8 @@ label battle:
             "たたかう":
 
                 wai "ここを…こうじゃ！"
+
+                play sound "重いパンチ1.mp3"
 
                 # ダメージ値：「MP/2～MP」の乱数
                 $ damage = renpy.random.randint(int(my_mp / 2),my_mp)
@@ -285,11 +314,18 @@ label battle:
 
                 $ my_mp -= enemy_atk
 
+                play sound "打撃7.mp3"
+
+                # 画面シェイク演出を実行
+                show layer master at shake
+
                 "ワイのメンタルが[enemy_atk]削られた！"
 
                 jump battle_loop
 
             "にげる":
+
+                play sound "逃走.mp3"
 
                 $ run_chance = 50 + my_luck
 
@@ -312,6 +348,9 @@ label battle:
 # 勝利
 # =========================
 label victory:
+
+    stop music
+    play sound "ドンドンパフパフ.mp3"
 
     "[enemy_name] を倒した！"
 
