@@ -44,7 +44,7 @@ label home:
 
     play music "main_bgm.mp3"
 
-    scene bg_town01
+    scene bg_town01 with fade
 
     #wai "ここは自宅前だ…"
 
@@ -102,6 +102,8 @@ label rest_home:
 label convenience:
 
     play music "main_bgm.mp3"
+
+    scene bg_conveni01 with fade
 
     menu:
 
@@ -193,6 +195,8 @@ label buy_takenoko:
 label station:
 
     play music "main_bgm.mp3"
+
+    scene bg_station01 with fade
 
     menu:
 
@@ -465,6 +469,10 @@ label unlock_data_center:
 # データセンター
 # =========================
 label data_center:
+
+    play music "data_center_bgm.mp3"
+
+    scene bg_station01 with fade
 
     wai "ここがデータセンターってやつかー"
 
