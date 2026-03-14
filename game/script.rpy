@@ -4,7 +4,7 @@ define pie = Character('ぴえん', color="#ff76b6")
 define mes = Character('メスガキ', color="#ff76b6")
 define chp = Character('チャッピー', color="#ff76b6")
 define god = Character('女神', color="#ff76b6")
-define alt = Character('アル〇マン', color="#5933ff")
+define alt = Character('アル〇マン', color="#7657ff")
 
 # ワイのパラメータ
 default my_lv = 1
@@ -15,7 +15,7 @@ default my_luck = 0
 default my_yen = 500
 
 # ゲーム進行用のフラグとか
-default is_debug_mode = True
+default is_debug_mode = False
 default is_unlock_data_center = False
 
 # ギャラ画像の表示調整用
@@ -31,6 +31,21 @@ transform shake:
     linear 0.05 xoffset -10
     linear 0.05 xoffset 10
     linear 0.05 xoffset 0
+
+# 敵のシェイクエフェクトの定義
+transform enemy_shake:
+
+    zoom 0.45
+    xalign 0.7
+    yalign 1.0
+
+    linear 0.04 xoffset -20
+    linear 0.04 xoffset 20
+    linear 0.04 xoffset -15
+    linear 0.04 xoffset 15
+    linear 0.04 xoffset -10
+    linear 0.04 xoffset 10
+    linear 0.04 xoffset 0
 
 # =========================
 # オープニング（自宅前）
@@ -347,6 +362,16 @@ label battle:
 
                 play sound "重いパンチ1.mp3"
 
+                # 敵のシェイク演出
+                if enemy == "gal":
+                    show gal as enemy at enemy_shake
+                elif enemy == "pien":
+                    show pien as enemy at enemy_shake
+                elif enemy == "mesu":
+                    show mesugaki as enemy at enemy_shake
+                elif enemy == "chappy":
+                    show chatgpt as enemy at enemy_shake
+                
                 # ダメージ値：「MP/2～MP」の乱数
                 $ damage = renpy.random.randint(int(my_mp / 2),my_mp)
 
@@ -634,8 +659,9 @@ label golden_ax:
 
     scene black with fade
 
-    "こうして、金の斧を持ち帰ったワイは、\n
-    メルカリに出品して980円を手に入れたのだった"
+    "こうして、金の斧を持ち帰ったワイは、\nメルカリに出品して980円を手に入れたのだった"
+
+    play sound "レベルアップ.mp3"
 
     "✌️✌️✌️ノーマルエンド✌️✌️✌️"
 
@@ -644,13 +670,13 @@ label golden_ax:
 # エンディング：銀のエンゼル
 label silver_angel:
 
-    alt "え？　銀のエンゼル！？\n
-    まあ、たまたま持っているが…じゃあ持ってけ"
+    alt "え？　銀のエンゼル！？\nまあ、たまたま持っているが…じゃあ持ってけ"
 
     scene black with fade
 
-    "こうして、銀のエンゼルを持ち帰ったワイは、\n
-    あと4枚集めて、カンヅメを手に入れたのだった"
+    "こうして、銀のエンゼルを持ち帰ったワイは、\nあと4枚集めてカンヅメを手に入れたのだった"
+
+    play sound "レベルアップ.mp3"
 
     "✌️✌️✌️ノーマルエンド✌️✌️✌️"
 
@@ -659,16 +685,15 @@ label silver_angel:
 # エンディング：シトロンモード
 label citron_mode:
 
-    alt "フハハハハハ！\n
-    わかってるじゃないか、よーし、もってけ、日本の青年よ！"
+    alt "フハハハハハ！\nわかってるじゃないか、よーし、もってけ、日本の青年よ！"
 
     wai "うっす！"
 
     scene black with fade
 
-    "こうして、シトロンモードを持ち帰ったワイは、\n
-    シトロンなチャッピーといつまでもいつまでも幸せに暮らしましたとさ\n
-    どんどはれ"
+    "こうして、シトロンモードを持ち帰ったワイは、\nシトロンなチャッピーといつまでもいつまでも幸せに暮らしましたとさ\nどんどはれ"
+
+    play sound "ドンドンパフパフ.mp3"
 
     "😊😊😊ベストエンド！😊😊😊"
 
