@@ -386,32 +386,35 @@ label victory:
 
     "[reward]円を手に入れた！"
 
+    play sound "ジャジャーン.mp3"
+
     if enemy == "gal":
 
         "ギャルのパンティを手に入れた！"
         "ワイはパンティを使った！"
 
-        $ my_exp += 2
-
-        "人生経験が2ふえた！"
+        $ add_exp = 2
+        $ my_exp += add_exp
 
     elif enemy == "pien":
 
         "ストロング缶を手に入れた！"
         "ワイはストロング缶を飲んだ！"
 
-        $ my_exp += 3
-
-        "人生経験が3ふえた！"
+        $ add_exp = 3
+        $ my_exp += add_exp
 
     elif enemy == "mesu":
 
         "スポブラを手に入れた！"
         "ワイはスポブラを使った！"
 
-        $ my_exp += 4
+        $ add_exp = 4
+        $ my_exp += add_exp
 
-        "人生経験が4ふえた！"
+    play sound "決定ボタンを押す17.mp3"
+
+    "人生経験が{add_exp}ふえた！"
 
     jump level_check
 
@@ -426,6 +429,8 @@ label level_check:
         $ my_lv += 1
         $ my_mp_max += 2
         $ my_mp = my_mp_max
+
+        play sound "レベルアップ.mp3"
 
         "レベルが上がった！"
         "MP最大値が上がった！"
