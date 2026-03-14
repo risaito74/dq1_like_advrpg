@@ -94,6 +94,8 @@ label rest_home:
 
     wai "ふう…やっぱり自分の部屋が一番じゃわい…"
 
+    play sound "決定ボタンを押す17.mp3"
+
     "ワイは自宅で休憩した！\n
     MP（メンタルポイント）が全回復した！"
 
@@ -143,12 +145,16 @@ label search_conveni:
 # コンビニ前：コンビニに入る
 label shop:
 
-    wai "ここはコンビニだ。\n
-    （所持金：[my_yen]円）"
+    play sound "入店チャイム.mp3"
+
+    scene bg_shop01 with fade
+
+    # 購入後に戻ってくる場所
+    label shop_continue:
 
     menu:
 
-        "所持金：[my_yen]円"
+        wai "{color=#080}Lv：[my_lv]　MP：[my_mp]　Exp：[my_exp]　所持金：[my_yen]円{/color}\nここはコンビニ店内だ…"
 
         "ドクターヘッツァーを買う (150円)":
             jump buy_hezza
@@ -157,6 +163,7 @@ label shop:
             jump buy_takenoko
 
         "コンビニから出る":
+            play sound "入店チャイム.mp3"
             jump convenience
 
 # コンビニ：ドクターヘッツァーを買う
@@ -170,11 +177,21 @@ label buy_hezza:
 
     $ my_yen -= price
     $ my_mp = my_mp_max
+    $ my_luck += 1
+
+    play sound "金額表示.mp3"
 
     "ドクターヘッツァーを飲んだ！"
+
+    play sound "決定ボタンを押す17.mp3"
+
     "MP（メンタルポイント）が全回復した！"
 
-    jump shop
+    play sound "決定ボタンを押す17.mp3"
+
+    "隠しパラメーター「うんのよさ」が1あがった！"
+
+    jump shop_continue
 
 # コンビニ：たけのこ因習村を買う
 label buy_takenoko:
@@ -187,13 +204,21 @@ label buy_takenoko:
 
     $ my_yen -= price
     $ my_mp = my_mp_max
-    $ my_luck += 1
+    $ my_luck += 2
+
+    play sound "金額表示.mp3"
 
     "たけのこ因習村を食べた！"
-    "MP（メンタルポイント）が全回復した！"
-    "幸運が1あがった！"
 
-    jump shop
+    play sound "決定ボタンを押す17.mp3"
+
+    "MP（メンタルポイント）が全回復した！"
+
+    play sound "決定ボタンを押す17.mp3"
+
+    "隠しパラメーター「うんのよさ」が2あがった！"
+
+    jump shop_continue
 
 # =========================
 # 駅前 
@@ -339,7 +364,8 @@ label battle:
 
                 $ my_mp -= enemy_atk
 
-                play sound "打撃7.mp3"
+                #play sound "打撃7.mp3"
+                play sound "刀で斬る2.mp3"
 
                 # 画面シェイク演出を実行
                 show layer master at shake
@@ -384,6 +410,8 @@ label victory:
 
     $ my_yen += reward
 
+    play sound "決定ボタンを押す17.mp3"
+
     "[reward]円を手に入れた！"
 
     play sound "ジャジャーン.mp3"
@@ -391,21 +419,21 @@ label victory:
     if enemy == "gal":
 
         "ギャルのパンティを手に入れた！"
-        "ワイはパンティを使った！"
+        "ワイは「ギャルのパンティ」という謎のアイテムを使用した！"
 
         $ add_exp = 2
 
     elif enemy == "pien":
 
         "ストロング缶を手に入れた！"
-        "ワイはストロング缶を飲んだ！"
+        "ワイはストロング缶を飲んだ！\n（ワイは39歳です。お酒は20歳になってから）"
 
         $ add_exp = 3
 
     elif enemy == "mesu":
 
         "スポブラを手に入れた！"
-        "ワイはスポブラを使った！"
+        "ワイは「スポブラ」という謎のアイテムを使用した！"
 
         $ add_exp = 4
 
@@ -413,7 +441,7 @@ label victory:
 
     play sound "決定ボタンを押す17.mp3"
 
-    "人生経験が{add_exp}ふえた！"
+    "人生経験が[add_exp]ふえた！"
 
     jump level_check
 
