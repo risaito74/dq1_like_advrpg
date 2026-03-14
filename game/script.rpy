@@ -262,18 +262,32 @@ label battle:
 
                 # 敵ごとの一言セリフ
                 if enemy == "gal":
-                    "ギャルの一言"
+                    $ line = renpy.random.choice([
+                        "うわ、キモッ！",
+                        "とりま、風呂入れし！",
+                        "は？こっち見んなし！"
+                    ])
+                    gal "[line]"         
                 elif enemy == "pien":
-                    "ぴえんの一言"
+                    $ line = renpy.random.choice([
+                        "おじさん、2万円ちょ～だい♥️",
+                        "キモすぎて無理だゆ？🥺",
+                        "かわいいだけじゃ、だめですか？"
+                    ])
+                    pie "[line]"         
                 elif enemy == "mesu":
-                    "メスガキの一言"
+                    $ line = renpy.random.choice([
+                        "ざぁ～こ、ざぁ～こ♥️",
+                        "まだ泣かないでね？キャハハ♥️",
+                        "よわよわじゃんｗ"
+                    ])
+                    mes "[line]"         
 
                 $ my_mp -= enemy_atk
 
                 "ワイのメンタルが[enemy_atk]削られた！"
 
                 jump battle_loop
-
 
             "にげる":
 

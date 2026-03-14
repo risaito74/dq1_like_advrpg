@@ -13,7 +13,7 @@
 ##
 ## _() で囲まれた文字列は翻訳時に生成されるファイルに記載されます。
 
-define config.name = _("dq1_like_advrpg")
+define config.name = _("ワイが勇者になれるわけないじゃん、ムリムリ！（※ムリだった）")
 
 
 ## 上で定義したタイトルをメインメニュースクリーン（ゲーム起動後、最初に表示され
@@ -24,7 +24,7 @@ define gui.show_name = True
 
 ## ゲームのバージョン。
 
-define config.version = "1.0"
+define config.version = "0.7"
 
 
 ## About（バージョン情報）スクリーンに表示されるテキスト。トリプルクオートの間に
