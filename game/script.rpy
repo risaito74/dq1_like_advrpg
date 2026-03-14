@@ -47,6 +47,11 @@ transform enemy_shake:
     linear 0.04 xoffset 10
     linear 0.04 xoffset 0
 
+# エンドロール用
+transform credits_scroll:
+    ypos 700
+    linear 30 ypos -900
+
 # =========================
 # オープニング（自宅前）
 # =========================
@@ -703,6 +708,44 @@ label citron_mode:
     play sound "ドンドンパフパフ.mp3"
 
     "😊😊😊ベストエンド！😊😊😊"
+
+    # エンドロール
+    $ quick_menu = False
+    play music "ending.mp3"
+
+    screen staff_roll():
+
+        text """
+    スタッフクレジット
+
+    企画・監督・制作進行
+    再豆リ作（スノハラ）
+
+    プログラム
+    ChatGPT（チノ）
+
+    プログラム補佐
+    再豆リ作（スノハラ）
+
+    グラフィック
+    ChatGPT（チノ）
+
+    メスガキグラフィック
+    Grok（グロちゃん）
+
+    音楽
+    Gemini（エミ）
+
+    効果音素材提供
+    効果音ラボ 様
+    """ xalign 0.5 at credits_scroll
+
+    scene black
+    show screen staff_roll
+
+    $ renpy.pause(27, hard=True)
+
+    centered "糸冬\n制作著作・再豆リ仟"
 
 # =========================
 # ゲーム終了
