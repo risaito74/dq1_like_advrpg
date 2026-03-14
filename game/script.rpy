@@ -296,6 +296,8 @@ label battle:
                 if enemy_hp <= 0:
                     jump victory
 
+                label enemy_attack:
+
                 "[enemy_name] のこうげき！"
 
                 # 敵ごとの一言セリフ
@@ -340,17 +342,14 @@ label battle:
 
                 if renpy.random.randint(1,100) <= run_chance:
                     "うまく逃げた！"
-                    jump home
+
+                    # 設定されている場所に戻る
+                    jump expression return_place
+
                 else:
                     "逃げられなかった！"
 
-                    "[enemy_name] のこうげき！"
-
-                    $ my_mp -= enemy_atk
-
-                    "ワイのメンタルが[enemy_atk]削られた！"
-
-                    jump battle_loop
+                    jump enemy_attack
 
 
 # =========================
