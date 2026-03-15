@@ -2,6 +2,8 @@
 
 Ren'Py製ノンフィールド型シンプル短編DQ1風RPG
 
+<img width="1285" height="753" alt="Image" src="https://github.com/user-attachments/assets/bf8e1bc2-c41e-406d-af43-dbd16f88aa0b" />
+
 ## 概要
 陰キャ主人公「ワイ」が現代日本で何かと戦うメンタルRPG。
 
