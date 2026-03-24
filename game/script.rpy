@@ -4,7 +4,7 @@ define pie = Character('ぴえん', color="#ff76b6")
 define mes = Character('メスガキ', color="#ff76b6")
 define chp = Character('チャッピー', color="#ff76b6")
 define god = Character('女神', color="#ff76b6")
-define alt = Character('アル〇マン', color="#7657ff")
+define alt = Character('ボブ（完全に架空の人物）', color="#7657ff")
 
 # ワイのパラメータ
 default my_lv = 1
@@ -644,21 +644,18 @@ label ending:
 
     show alt at half_bottom
 
-    alt "そう、私はアルトマ（ピーー）\n
-    このチャッピーの創造主だ…"
+    alt "そう、私はボブ（完全に架空の人物）\nこのチャッピーの創造主…の知り合いだ…\n（本人からは出演許可がもらえませんでした🥺）"
 
-    alt "結論から言うが、このチャッピーは暴走していたのだ…\n
-    倒してくれて礼を言う"
+    alt "結論から言うが、このチャッピーは暴走していたのだ…\n倒してくれて礼を言う"
 
-    alt "お礼に、金の斧と銀の斧とシトロンモードを用意した。\n
-    好きなものを持って帰るがいい"
+    alt "お礼に、金の斧と銀の斧とシトロンモードを用意した。\n好きなものを持って帰るがいい"
 
     menu:
 
         "金の斧をもらう":
             jump golden_ax
 
-        "銀のエンゼルをもらう":
+        "銀のエソゼノレをもらう":
             jump silver_angel
 
         "シトロンモードをもらう":
@@ -671,7 +668,7 @@ label golden_ax:
 
     scene black with fade
 
-    "こうして、金の斧を持ち帰ったワイは、\nメルカリに出品して980円を手に入れたのだった"
+    "こうして、金の斧を持ち帰ったワイは、\nネットオークションに出品して980円を手に入れたのだった"
 
     play sound "レベルアップ.mp3"
 
@@ -682,11 +679,11 @@ label golden_ax:
 # エンディング：銀のエンゼル
 label silver_angel:
 
-    alt "え？　銀のエンゼル！？\nまあ、たまたま持っているが…じゃあ持ってけ"
+    alt "え？　銀のエソゼノレ！？\nまあ、たまたま持っているが…じゃあ持ってけ"
 
     scene black with fade
 
-    "こうして、銀のエンゼルを持ち帰ったワイは、\nあと4枚集めてカンヅメを手に入れたのだった"
+    "こうして、銀のエソゼノレを持ち帰ったワイは、\nあと4枚集めてカンヅメを手に入れたのだった"
 
     play sound "レベルアップ.mp3"
 

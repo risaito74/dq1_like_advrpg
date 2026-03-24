@@ -26,7 +26,7 @@ define gui.main_menu_background = "images/title.png"
 
 ## ゲームのバージョン。
 
-define config.version = "0.7"
+define config.version = "0.71"
 
 
 ## About（バージョン情報）スクリーンに表示されるテキスト。トリプルクオートの間に
